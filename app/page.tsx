@@ -5,12 +5,16 @@ import Image from 'next/image'
 import { useGlobalState } from './context/globalProvider';
 import { useEffect, useRef, useState } from 'react';
 import { Agent } from './utils/interfaces';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const { allAgents } = useGlobalState();
   const [agent1, setAgent1] = useState<Agent>();
   const [agent2, setAgent2] = useState<Agent>();
   const elementRef = useRef<HTMLDivElement | null>(null);
+
+  const router = useRouter();
+  const handleRoute = (link:string) => router.push(link);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +83,7 @@ export default function Home() {
               <p className='text-[.9rem] md:text-[1rem] font-anton'>Lebih dari sekadar senjata dan peluru, kamu akan memilih Agen bersenjatakan kemampuan yang adaptif, tangkas, dan mematikan untuk membuktikan keahlian menembakmu. Sejalan dengan berbedanya kepiawaian dalam menembak, begitu pula di sini; tak akan ada Agen dengan karakteristik sama.</p>
 
               <div className="flex items-center justify-center">
-                <div className="border p-[1rem] border-white">
+                <div onClick={() => {handleRoute('/agents')}} className="border p-[1rem] border-white">
                   <Link href={'/agents'} className='transition-colors duration-300 ease-in-out text-black font-anton uppercase text-[1rem] py-[10px] px-[45px] bg-white hover:bg-black hover:text-white'>see all agent</Link>
                 </div>
               </div>
@@ -98,7 +102,7 @@ export default function Home() {
             <span>Tiap peta adalah panggung tersendiri untuk memamerkan kemampuan berpikir kreatifmu. Semua dirancang sesuai untuk strategi tim, laga spektakuler, dan momen sengit. Perlihatkan kepiawaian yang akan ditiru oleh pemain lain sampai bertahun-tahun mendatang.</span>
           </p>
           <div className="md:w-[60%]">
-            <Link href={'/maps'} className='transition-colors duration-300 ease-in-out text-white font-anton uppercase text-[1rem] py-[10px] px-[45px] bg-lightRed hover:bg-black'>see all map</Link>
+            <Link onClick={() => {handleRoute('/maps')}} href={'/maps'} className='transition-colors duration-300 ease-in-out text-white font-anton uppercase text-[1rem] py-[10px] px-[45px] bg-lightRed hover:bg-black'>see all map</Link>
           </div>
         </div>
         {/* Mobile */}
@@ -111,7 +115,7 @@ export default function Home() {
               <span>Tiap peta adalah panggung tersendiri untuk memamerkan kemampuan berpikir kreatifmu. Semua dirancang sesuai untuk strategi tim, laga spektakuler, dan momen sengit. Perlihatkan kepiawaian yang akan ditiru oleh pemain lain sampai bertahun-tahun mendatang.</span>
             </p>
             <div className="w-[60%]">
-              <Link href={'/maps'} className='transition-colors duration-300 ease-in-out text-white font-anton uppercase text-[1rem] py-[10px] px-[45px] bg-lightRed hover:bg-black'>see all map</Link>
+              <Link onClick={() => {handleRoute('/maps')}} href={'/maps'} className='transition-colors duration-300 ease-in-out text-white font-anton uppercase text-[1rem] py-[10px] px-[45px] bg-lightRed hover:bg-black'>see all map</Link>
             </div>
           </div>
         </div>

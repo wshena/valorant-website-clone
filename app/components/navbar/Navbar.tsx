@@ -7,6 +7,7 @@ import { AngleDown, RiotIcon, ValorantIcon } from '../../utils/Icons'
 import LanguageButton from './LanguageButton'
 import SearchButton from './SearchButton'
 import MobileMenu from './MobileMenu'
+import { useRouter } from 'next/navigation'
 
 const DropDownContent = ({ links }: { links: NavbarDropdown[] }) => {
   return (
@@ -25,6 +26,9 @@ const DropDownContent = ({ links }: { links: NavbarDropdown[] }) => {
 const Navbar = () => {
   const [navClick, setNavClick] = useState(false);
   const [navId, setNavId] = useState(0);
+
+  const router = useRouter();
+  const handleRoute = (link:string) => router.push(link);
 
   const handleNavEnter = (id:number) => {
     setNavClick(true);
@@ -47,7 +51,7 @@ const Navbar = () => {
               const index = navItem.id
               return (
                 <li key={navItem.id} onMouseEnter={() => {handleNavEnter(navItem.id)}} className='relative'>
-                  <Link href={navItem.link} className='uppercase cursor-pointer nav-link flex items-center gap-[10px]'>
+                  <Link onClick={() => {handleRoute(navItem.link)}} href={navItem.link} className='uppercase cursor-pointer nav-link flex items-center gap-[10px]'>
                     <span className=''>{navItem.title}</span>
                     {(navItem.id === 1 || navItem.id === 5 || navItem.id === 6) && (
                       <AngleDown size={10} color='white'/>
