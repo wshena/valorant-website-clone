@@ -2,19 +2,21 @@
 import {ValorantLogo} from '@/app/utils/Icons'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useGlobalState } from './context/globalProvider';
 import { useEffect, useRef, useState } from 'react';
 import { Agent } from './utils/interfaces';
 import { useRouter } from 'next/navigation';
+import { useGlobalState } from './context/globalProvider';
 
 export default function Home() {
-  const { allAgents } = useGlobalState();
+  const {allAgents} = useGlobalState();
   const [agent1, setAgent1] = useState<Agent>();
   const [agent2, setAgent2] = useState<Agent>();
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const router = useRouter();
   const handleRoute = (link:string) => router.push(link);
+
+  
 
   useEffect(() => {
     const handleScroll = () => {

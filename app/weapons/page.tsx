@@ -1,12 +1,25 @@
 'use client'
-import React from 'react'
-import { useGlobalState } from '../context/globalProvider';
+import React, { useEffect, useState } from 'react'
 import { Weapon } from '../utils/interfaces';
 import WeaponBox from '../components/WeaponBox';
+import { getAllWeapons } from '../utils/fetchData';
 
 
 const page = () => {
-  const { allWeapon } = useGlobalState();
+  const [allWeapon, setAllWeapon] = useState([]);
+
+  useEffect(() => {
+    const fetchAllWeaponData = async () => {
+      try {
+        const data = await getAllWeapons();
+        setAllWeapon(data)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    fetchAllWeaponData();
+  }, [])
 
   return (
     <section className='w-full bg-lightGray px-[1rem] md:px-[2rem] xl:px-0'>

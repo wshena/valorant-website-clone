@@ -1,17 +1,49 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
-import { useGlobalState } from '../context/globalProvider';
 import { MapData } from '../utils/interfaces';
+import { getAllMapsData, getMapDataFromId } from '../utils/fetchData';
 
 const page = () => {
-  const { allMaps, mapData, handleMapId, loading } = useGlobalState();
-  // const allMapData = allMaps.map((item:MapData) => item);
+  const [mapData, setMapData] = useState<MapData>();
+  const [mapId, setMapId] = useState('');
+  const [allMaps, setAllMaps] = useState<MapData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const handleMapId = (id:string) => setMapId(id)
 
   const [click, setClick] = useState(false);
   const handleClick = () => {
     setClick(!click);
   };
+
+  useEffect(() => {
+    const fetchAllMapData = async () => {
+      try {
+        const data = await getAllMapsData();
+        setAllMaps(data)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    fetchAllMapData();
+  }, [])
+
+  useEffect(() => {
+    const mapDataFromId = async (id:string) => {
+      try {
+        const data = await getMapDataFromId(id);
+        setMapData(data);
+        setLoading(false); // Set loading to false when image data is loaded
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    setLoading(true); // Set loading to true when changing agentId
+    mapDataFromId(mapId);
+  }, [mapId])
 
   return (
     <section className='w-full overflow-y-scroll relative bg-lightGray'>

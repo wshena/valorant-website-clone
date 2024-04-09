@@ -2,7 +2,7 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { Agent, Ability } from '@/app/utils/interfaces'
 import Image from 'next/image'
-import { useGlobalState } from '@/app/context/globalProvider'
+import { getAgentDataFromId, getAllAgentsData } from '@/app/utils/fetchData'
 
 const ScrollAgentText = ({children}:{children:ReactNode}) => {
   const elementRef = useRef<HTMLDivElement | null>(null);
@@ -61,13 +61,52 @@ const ScrollAgentImage = ({children}:{children:ReactNode}) => {
 };
 
 const AllAgents = () => {
-  const {agentData, allAgents, agentId, handleAgentId, loading, setLoading} = useGlobalState();
+  const [allAgents, setAllAgents] = useState<Agent []>([]);
+
+  const [agentData, setAgentData] = useState<Agent>();
+  const [agentId, setAgentId] = useState('');
+
+  const [loading, setLoading] = useState(true);
 
   const [abilityIdx, setAbilityIdx] = useState(0);
+
+  const handleAgentId = (id:string) => setAgentId(id)
   
   const handleAbilityClick = (idx: number) => {
     setAbilityIdx(idx);
   };
+
+  useEffect(() => {
+    const fetchAllAgentData = async () => {
+      try {
+        const data = await getAllAgentsData();
+        setAllAgents(data)
+
+        if (data.length > 0) {
+          setAgentData(data[0]);
+          setAgentId(data[0].uuid);
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    fetchAllAgentData();
+  }, []);
+
+  useEffect(() => {
+    const agentDataFromId = async (id:string) => {
+      try {
+        const data = await getAgentDataFromId(id);
+        setAgentData(data);
+        setLoading(false); // Set loading to false when image data is loaded
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    setLoading(true); // Set loading to true when changing agentId
+    agentDataFromId(agentId);
+  }, [agentId])
 
   return (      
     <section className='w-[100%]'>

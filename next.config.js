@@ -1,5 +1,14 @@
+const { hostname } = require("os");
+
 module.exports = {
   images: {
-    domains: ['media.valorant-api.com', 'images.contentstack.io'],
-  },
+    remotePatterns: [
+      {
+        hostname: "media.valorant-api.com",
+      },
+      {
+        hostname: "images.contentstack.io",
+      }
+    ]
+  }
 };
