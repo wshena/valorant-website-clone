@@ -102,7 +102,7 @@ const MobileMenu = () => {
           })}
         </ul>
         
-        <Link href={'/download'} className='text-center font-anton text-white py-[10px] px-[20px] rounded-[10px] bg-red-800 text-[12px] uppercase transition-colors duration-300 ease-in-out'>Play Now</Link>
+        <Link href={'#'} className='text-center font-anton text-white py-[10px] px-[20px] rounded-[10px] bg-red-800 text-[12px] uppercase transition-colors duration-300 ease-in-out'>Play Now</Link>
       </div>
       {/* Menu */}
     </>
