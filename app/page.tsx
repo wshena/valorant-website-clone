@@ -2,21 +2,14 @@
 import {ValorantLogo} from '@/app/utils/Icons'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react';
-import { Agent } from './utils/interfaces';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { useGlobalState } from './context/globalProvider';
 
 export default function Home() {
-  const {allAgents} = useGlobalState();
-  const [agent1, setAgent1] = useState<Agent>();
-  const [agent2, setAgent2] = useState<Agent>();
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const router = useRouter();
   const handleRoute = (link:string) => router.push(link);
-
-  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,21 +23,11 @@ export default function Home() {
       }
     };
 
-    while (randomAgent2 === randomAgent1) {
-      randomAgent2 = Math.floor(Math.random() * allAgents.length)
-    }
-  
-    setAgent1(allAgents[randomAgent1]);
-    setAgent2(allAgents[randomAgent2]);
-
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  let randomAgent1 = Math.floor(Math.random() * allAgents.length)
-  let randomAgent2 = Math.floor(Math.random() * allAgents.length)
 
   return (
     <main className="w-full overflow-x-hidden bg-lightGray">
@@ -62,23 +45,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='w-full py-[3rem] bg-lightRed text-white h-[860px]'>
+      <section className='w-full py-[3rem] bg-lightRed text-white'>
         <div ref={elementRef} style={{ transition: 'transform 0.3s' }} className="container flex items-center justify-end relative">
           <div className="absolute top-0 left-0 w-full h-[800px] lg:h-full bg-center bg-cover bg-opacity-50 z-10" style={{
             backgroundImage: 'url("/partikel2.png")'
           }}></div>
-          {(agent1 && agent2) && (
-            <>
-              <Image src={agent1.fullPortrait} alt={agent1.displayName} width={900} height={600} className='z-30 absolute top-[300px] lg:-top-[40px] -left-[50px] lg:-left-[200px] hidden lg:block' />
-              <Image src={agent2.fullPortrait} alt={agent2.displayName} width={900} height={600} className='z-30 absolute top-[300px] lg:-top-[40px] left-[100px] lg:-left-[0px] hidden lg:block' />
-              <Image src={agent1.fullPortrait} alt={agent1.displayName} width={700} height={600} className='z-30 absolute top-[300px] -left-[40px] hidden md:block lg:hidden' />
-              <Image src={agent2.fullPortrait} alt={agent2.displayName} width={700} height={600} className='z-30 absolute top-[300px] left-[100px] hidden md:block lg:hidden' />
-              <Image src={agent1.fullPortrait} alt={agent1.displayName} width={900} height={600} className='z-30 absolute top-[400px] -left-[40px] block md:hidden' />
-              <Image src={agent2.fullPortrait} alt={agent2.displayName} width={900} height={600} className='z-30 absolute top-[400px] left-[60px] block md:hidden' />
-            </>
-          )}
           
-          <div className="z-30 w-full lg:h-[800px] flex lg:items-center justify-start lg:justify-end">
+          
+          <div className="z-30 w-full flex lg:items-center justify-start lg:justify-end">
             <div className="px-[1rem] md:px-[3rem] lg:px-0 w-[100%] lg:w-[30%] flex flex-col gap-[20px] lg:gap-[30px] lg:mr-[100px]">
               <h1 className='text-[3rem] md:text-[4rem] lg:text-[5rem] uppercase font-anton'>Agent</h1>
               <h2 className='text-[1.3rem] md:text-[2rem] uppercase font-anton'>Creativity is your best weapon</h2>

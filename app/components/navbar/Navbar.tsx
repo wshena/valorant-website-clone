@@ -51,7 +51,7 @@ const Navbar = () => {
               const index = navItem.id
               return (
                 <li key={navItem.id} onMouseEnter={() => {handleNavEnter(navItem.id)}} className='relative'>
-                  <Link onClick={() => {handleRoute(navItem.link)}} href={navItem.link} className='uppercase cursor-pointer nav-link flex items-center gap-[10px]'>
+                  <Link href={navItem.link} className='uppercase cursor-pointer nav-link flex items-center gap-[10px]'>
                     <span className=''>{navItem.title}</span>
                     {(navItem.id === 1 || navItem.id === 5 || navItem.id === 6) && (
                       <AngleDown size={10} color='white'/>
