@@ -12,13 +12,15 @@ const config: Config = {
         anton: ['Anton', 'sans-serif'],
       },
       colors: {
-        darkRed: '#A30000',
+        mainDark: '#111111',
+        darkRed: '#A30000',        
         darkGray: '#ece8e1',
         darkBrown: '#292929',
         lightBrown: '#7e7e7e',
         grayishGreen: '#8b978f',
         lightGray: '#ece8e1',
-        lightRed: '#ff4655'
+        lightRed: '#ff4655',
+        mainText: '#0F1923'
       }
     },
   },

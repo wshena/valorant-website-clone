@@ -97,3 +97,19 @@ body {
 .home-playnow:hover::after {
   width: 100%;
 }
+
+.artikel-image::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  transition: all 300ms ease-in-out;
+  background-color: #ff4655;
+}
+
+.artikel-image:hover::after {
+  width: 100%;
+}
