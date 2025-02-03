@@ -9,8 +9,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        textMain: '#0F1923',
+        textSecondary: '#24203C',
+        mainGray: '#ECE9E4',
+        mediumGray: '#111111',
+        darkGreen: 'rgb(15, 25, 35)',
+        darkGray: '#292929',
+        mainBlack: '#111111',
+        mainRed: 'rgb(225, 70, 85)',
+        secondaryRed: '#FF4655',
+        bgHover: 'rgba(128,128,128,0.2)'
       },
     },
   },
