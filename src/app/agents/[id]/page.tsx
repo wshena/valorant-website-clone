@@ -3,7 +3,7 @@ import { getAgentData } from '@/utils/fetcher';
 import { hexToRgba } from '@/utils/function';
 import React from 'react'
 
-const page = async ({params}:{params:{id:string, name:string}}) => {
+const page = async ({params}:{params:any}) => {
   const {id} = await params;
   const agentData = await getAgentData(id);
   const bgGradientColor = agentData?.data?.backgroundGradientColors;
